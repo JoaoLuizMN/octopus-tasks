@@ -21,13 +21,15 @@ export const users: User[] = [
     todos: [],
   },
   {
-    username: "jl",
-    password: "senha3",
+    username: "flipe",
+    password: "C#2024",
     todos: [],
   },
 ];
 
 export const ICON_SIZE = {
+  xxsmall: 25,
+  xsmall: 50,
   small: 100,
   medium: 150,
   large: 200,

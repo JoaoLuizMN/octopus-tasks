@@ -10,6 +10,7 @@ type UserActions = {
   addTodo: (todo: Todo) => void;
   removeTodo: (todoIndex: number) => void;
   updateTodo: (todoIndex: number, updatedTodo: Todo) => void;
+  checkTodo: (todoIndex: number) => void;
 };
 
 export const useUser = create<UserState & UserActions>((set) => ({
@@ -27,8 +28,6 @@ export const useUser = create<UserState & UserActions>((set) => ({
   },
 
   addTodo(todo) {
-    if (!this.user) return;
-
     set((state) => ({
       user: { ...state.user!, todos: [...state.user!.todos, todo] },
     }));
@@ -38,7 +37,7 @@ export const useUser = create<UserState & UserActions>((set) => ({
     set((state) => ({
       user: {
         ...state.user!,
-        todos: [...state.user!.todos.splice(todoIndex, 1)],
+        todos: state.user!.todos.filter((_, index) => index !== todoIndex),
       },
     }));
   },
@@ -46,7 +45,21 @@ export const useUser = create<UserState & UserActions>((set) => ({
     set((state) => ({
       user: {
         ...state.user!,
-        todos: [(state.user!.todos[todoIndex] = update)],
+        todos: [
+          ...state.user!.todos.map((todo, index) =>
+            index === todoIndex ? update : todo,
+          ),
+        ],
+      },
+    }));
+  },
+  checkTodo(todoIndex) {
+    set((state) => ({
+      user: {
+        ...state.user!,
+        todos: state.user!.todos.map((todo, index) =>
+          index === todoIndex ? { ...todo, status: !todo.status } : todo,
+        ),
       },
     }));
   },

@@ -3,11 +3,16 @@
 import React, { useRef } from "react";
 import { ICON_SIZE, User } from "../utils/config";
 import { useUser } from "@/hooks/useUser";
-
+import { redirect } from "next/navigation";
 import { GiOctopus } from "react-icons/gi";
 
 export default function Login() {
-  const { login } = useUser();
+  const { login, user } = useUser();
+
+  if (user) {
+    redirect("/dashboard");
+  }
+
   const usernameInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
@@ -43,8 +48,9 @@ export default function Login() {
           Log in
         </button>
       </div>
-      <p>
-        "Eight arms to solve your problems... <span>- mesmo, eu</span>"
+      <p className="text-neutral-600">
+        "Eight arms to solve your problems...{" "}
+        <span className="italic">- mesmo, eu</span>"
       </p>
     </div>
   );
