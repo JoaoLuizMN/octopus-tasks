@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { GiOctopus } from "react-icons/gi";
 
 export default function Login() {
-  const { login, user } = useUser();
+  const { login, register, user } = useUser();
 
   if (user) {
     redirect("/dashboard");
@@ -36,6 +36,7 @@ export default function Login() {
             className="rounded-lg border p-2 placeholder:text-center"
           />
         </div>
+        <button className="duration-250 w-full rounded-lg border bg-blue-400 transition ease-in-out active:bg-blue-300" onClick={() => register(usernameInputRef.current?.value!, passwordInputRef.current?.value!) }>Create</button>
         <button
           onClick={() =>
             login(
@@ -43,7 +44,7 @@ export default function Login() {
               passwordInputRef.current?.value!,
             )
           }
-          className="onc duration-250 w-full rounded-lg border bg-blue-400 transition ease-in-out active:bg-blue-300"
+          className="duration-250 w-full rounded-lg border bg-blue-400 transition ease-in-out active:bg-blue-300"
         >
           Log in
         </button>

@@ -9,23 +9,7 @@ export type User = {
   todos: Todo[];
 };
 
-export const users: User[] = [
-  {
-    username: "joaoluiz",
-    password: "senha1",
-    todos: [],
-  },
-  {
-    username: "luiz",
-    password: "senha2",
-    todos: [],
-  },
-  {
-    username: "flipe",
-    password: "C#2024",
-    todos: [],
-  },
-];
+export const users: User[] = [];
 
 export const ICON_SIZE = {
   xxsmall: 25,

@@ -11,6 +11,7 @@ type UserActions = {
   removeTodo: (todoIndex: number) => void;
   updateTodo: (todoIndex: number, updatedTodo: Todo) => void;
   checkTodo: (todoIndex: number) => void;
+  register: (username: string, password: string) => void
 };
 
 export const useUser = create<UserState & UserActions>((set) => ({
@@ -62,5 +63,13 @@ export const useUser = create<UserState & UserActions>((set) => ({
         ),
       },
     }));
+  },
+  register(username, password) {
+    users.push(
+              {username: username ,
+                password: password ,
+                todos: []
+              }
+            )
   },
 }));
